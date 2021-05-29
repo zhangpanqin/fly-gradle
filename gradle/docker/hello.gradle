@@ -1,0 +1,10 @@
+
+ext{
+    name="张攀钦"
+}
+
+task hello{
+    doLast {
+        println("hello world")
+    }
+}

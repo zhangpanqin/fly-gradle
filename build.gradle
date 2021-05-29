@@ -2,8 +2,57 @@ plugins {
     id 'java'
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs("src")
+        }
+    }
+    test{
+        java {
+            srcDirs("test")
+        }
+    }
+}
+// 配置编译的目录
+buildDir("build1")
+
+apply from: './gradle/docker/hello.gradle'
 group 'com.mflyyou.gradle'
 version '1.0-SNAPSHOT'
+
+task testTask{
+    group("测试任务group")
+    description("测试任务描述")
+    doLast {
+        println("22222")
+    }
+}
+compileJava.dependsOn("testTask")
+
+// 在某个存在的任务上添加任务
+compileJava {
+    doFirst{
+        logger.info("编译代码之前1,$projectDescription")
+    }
+    doLast {
+        println("编译代码之后3")
+    }
+}
+
+compileJava {
+    doFirst{
+        println("编译代码之前2")
+    }
+    doLast {
+        println("编译代码之后4")
+    }
+}
 
 repositories {
     mavenCentral()
