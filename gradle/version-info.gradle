@@ -1,0 +1,20 @@
+import java.time.ZonedDateTime
+
+def gitRevision = "git rev-parse HEAD".execute().text.trim()
+def gitBranch = "git rev-parse --abbrev-ref HEAD".execute().text.trim()
+def javaVersion = System.getProperties().getProperty("java.version").trim()
+def buildDate = (ZonedDateTime.now()).toString()
+
+jar {
+    baseName = rootProject.sdkArtifact
+    version = rootProject.sdkVersion
+    manifest {
+        attributes(
+                "Git-Revision": gitRevision,
+                "Git-Branch": gitBranch,
+                "Build-Date": buildDate,
+                "X-Compile-Source-JDK": javaVersion,
+                "X-Compile-Target-JDK": javaVersion
+        )
+    }
+}

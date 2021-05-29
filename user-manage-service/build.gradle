@@ -1,23 +1,19 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.0'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'java'
+    id 'application'
+    id 'org.springframework.boot'
 }
+
 group = 'com.mflyyou.study'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = 11
+targetCompatibility = 11
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
-repositories {
-    mavenCentral()
+application {
+    mainClassName = 'com.fly.study.gradle.GradleApplication'
 }
 
 dependencies {
+    implementation(project(":user-manage-sdk"))
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
@@ -25,6 +21,4 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-test {
-    useJUnitPlatform()
-}
+apply from: "${rootProject.projectDir}/gradle/docker-compose/docker-compose.gradle"
