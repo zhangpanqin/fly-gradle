@@ -1,3 +1,5 @@
 rootProject.name = 'fly-gradle'
 include 'user-manage-service','user-manage-sdk'
+include 'lib-a'
+include 'lib-b'
 

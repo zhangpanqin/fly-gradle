@@ -10,10 +10,4 @@ class GradleApplicationTests {
     private static final int SIZE = 1024 * 1024 * 1024;
 
 
-    @Test
-    void test22() {
-        byte[] AA = new byte[SIZE];
-        assertThat(AA.length, is(SIZE));
-    }
-
 }

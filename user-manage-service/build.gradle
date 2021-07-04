@@ -14,6 +14,7 @@ application {
 
 dependencies {
     implementation(project(":user-manage-sdk"))
+    implementation(project(":lib-a"))
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
