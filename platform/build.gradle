@@ -1,0 +1,14 @@
+plugins {
+    id 'java-platform'
+}
+
+group 'com.mflyyou.gradle'
+version '1.0-SNAPSHOT'
+
+
+dependencies {
+    api platform('org.springframework.boot:spring-boot-dependencies:2.3.6.RELEASE')
+    constraints{
+        api platform('com.fasterxml.jackson:jackson-bom:2.9.8')
+    }
+}

@@ -23,6 +23,8 @@ allprojects {
         }
     }
 }
+
+
 // 配置编译的目录
 buildDir("build")
 subprojects {
@@ -35,7 +37,18 @@ subprojects {
             mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
         }
     }
-
+//    bootBuildImage {
+//        imageName = "docker.example.com/library/${project.name}"
+//        publish = true
+//        docker {
+//            publishRegistry {
+//                username = "user"
+//                password = "secret"
+//                url = "https://docker.example.com/v1/"
+//                email = "user@example.com"
+//            }
+//        }
+//    }
     configurations {
         parentBom
         runtimeOnly.extendsFrom(parentBom)
