@@ -2,13 +2,33 @@ plugins {
     id 'java-platform'
 }
 
-group 'com.mflyyou.gradle'
-version '1.0-SNAPSHOT'
-
+javaPlatform {
+    allowDependencies()
+}
 
 dependencies {
     api platform('org.springframework.boot:spring-boot-dependencies:2.3.6.RELEASE')
-    constraints{
-        api platform('com.fasterxml.jackson:jackson-bom:2.9.8')
+    constraints {
+
+    }
+}
+publishing {
+    publications {
+        myPlatform(MavenPublication) {
+            from components.javaPlatform
+            groupId = rootProject.group
+            artifactId = rootProject.platformArtifact
+            version = rootProject.platformVersion
+        }
+    }
+
+    repositories {
+        maven {
+            url = project.platformVersion.endsWith("SNAPSHOT") ? "${mavenSnapshotsUrl}" : "${mavenReleaseUrl}"
+            credentials {
+                username "${mavenUsername}"
+                password "${mavenPassword}"
+            }
+        }
     }
 }

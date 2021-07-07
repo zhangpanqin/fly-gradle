@@ -4,15 +4,11 @@ plugins {
     id "org.springframework.boot" version "2.3.6.RELEASE" apply false
     id "com.gorylenko.gradle-git-properties" version "2.2.4" apply false
 }
-group 'com.mflyyou.gradle'
-version '1.0-SNAPSHOT'
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
-
 allprojects {
+    java {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
     repositories {
         maven {
             url "${mavenPublicUrl}"
@@ -24,62 +20,44 @@ allprojects {
     }
 }
 
-
-// 配置编译的目录
-buildDir("build")
 subprojects {
-    apply plugin: "java"
-    apply plugin: "groovy"
-    apply plugin: "maven-publish"
-    apply plugin: 'io.spring.dependency-management'
-    dependencyManagement {
-        imports {
-            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+    subproject ->
+        apply(new Action<ObjectConfigurationAction>() {
+            @Override
+            void execute(ObjectConfigurationAction objectConfigurationAction) {
+                // 打印子项目名称
+                if (!subproject.name.contains("platform")) {
+                    println subproject.name
+                    objectConfigurationAction.plugin('java')
+                    objectConfigurationAction.plugin('groovy')
+                }
+            }
+        })
+
+        apply plugin: "maven-publish"
+
+        configurations {
+            parentBom
+            runtimeOnly.extendsFrom(parentBom)
+            compileOnly.extendsFrom(parentBom)
+            annotationProcessor.extendsFrom(parentBom)
+            implementation.extendsFrom(parentBom)
         }
-    }
-//    bootBuildImage {
-//        imageName = "docker.example.com/library/${project.name}"
-//        publish = true
-//        docker {
-//            publishRegistry {
-//                username = "user"
-//                password = "secret"
-//                url = "https://docker.example.com/v1/"
-//                email = "user@example.com"
-//            }
-//        }
-//    }
-    configurations {
-        parentBom
-        runtimeOnly.extendsFrom(parentBom)
-        compileOnly.extendsFrom(parentBom)
-        annotationProcessor.extendsFrom(parentBom)
-        implementation.extendsFrom(parentBom)
-        api.extendsFrom(parentBom)
-    }
+        configurations.all {
+            // Check for updates every build
+            resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+        }
 
-    dependencies {
-        //test dependencies
-        testImplementation("org.junit.jupiter:junit-jupiter-api")
-        testImplementation("org.junit.jupiter:junit-jupiter-params")
-        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-        testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
-        testImplementation("org.mockito:mockito-junit-jupiter")
-    }
+        dependencies {
+            parentBom platform('com.mflyyou:platform-bom:3.0.1-SNAPSHOT'){
+                changing =true
+            }
+        }
 
 
-    configurations.all {
-        // Check for updates every build
-        resolutionStrategy.cacheChangingModulesFor 0, "seconds"
-    }
+        tasks.withType(Test) {
+            useJUnitPlatform()
+        }
 
-    tasks.withType(Test) {
-        useJUnitPlatform()
-    }
-
-    wrapper {
-        gradleVersion = "6.7.1"
-    }
-
-    apply from: "${rootProject.projectDir}/gradle/checkstyle/checkstyle.gradle"
+        apply from: "${rootProject.projectDir}/gradle/checkstyle/checkstyle.gradle"
 }

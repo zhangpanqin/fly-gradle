@@ -3,4 +3,3 @@ include 'user-manage-service','user-manage-sdk'
 include 'lib-a'
 include 'lib-b'
 include 'platform'
-

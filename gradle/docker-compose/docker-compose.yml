@@ -39,24 +39,24 @@ services:
       - sonarqube_data:/opt/sonarqube/data
       - sonarqube_extensions:/opt/sonarqube/extensions
       - sonarqube_logs:/opt/sonarqube/logs
-  gitlab:
-    image: 'gitlab/gitlab-ee:13.11.6-ee.0'
-    container_name: fly-gradle-gitlab
-    restart: always
-    hostname: 'localhost'
-    environment:
-      GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://localhost:9910'
-    ports:
-      - '9910:80'
-      - '9911:443'
-      - '9912:22'
-    volumes:
-      - gitlib_config:/etc/gitlab
-      - gitlib_logs:/var/log/gitlab
-      - gitlib_data:/var/opt/gitlab
-    networks:
-      - fly-gradle
+#  gitlab:
+#    image: 'gitlab/gitlab-ee:13.11.6-ee.0'
+#    container_name: fly-gradle-gitlab
+#    restart: always
+#    hostname: 'localhost'
+#    environment:
+#      GITLAB_OMNIBUS_CONFIG: |
+#        external_url 'http://localhost:9910'
+#    ports:
+#      - '9910:80'
+#      - '9911:443'
+#      - '9912:22'
+#    volumes:
+#      - gitlib_config:/etc/gitlab
+#      - gitlib_logs:/var/log/gitlab
+#      - gitlib_data:/var/opt/gitlab
+#    networks:
+#      - fly-gradle
 networks:
   fly-gradle:
     driver: bridge
