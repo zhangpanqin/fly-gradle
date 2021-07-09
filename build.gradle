@@ -17,6 +17,8 @@ allprojects {
                 password "${mavenPassword}"
             }
         }
+        mavenLocal()
+        mavenCentral()
     }
 }
 
@@ -27,13 +29,12 @@ subprojects {
             void execute(ObjectConfigurationAction objectConfigurationAction) {
                 // 打印子项目名称
                 if (!subproject.name.contains("platform")) {
-                    println subproject.name
+//                    println subproject.name
                     objectConfigurationAction.plugin('java')
                     objectConfigurationAction.plugin('groovy')
                 }
             }
         })
-
         apply plugin: "maven-publish"
 
         configurations {

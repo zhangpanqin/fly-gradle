@@ -10,6 +10,29 @@ application {
     mainClassName = 'com.fly.study.gradle.GradleApplication'
 }
 
+task 'hello-world'{
+    group 'mflyyou'
+    dependsOn 'hello2'
+    println("hello world!")
+    doLast {
+        println("hello world dolast!")
+    }
+    doFirst {
+        println("hello world dofirst!")
+    }
+}
+task hello2{
+//    enabled(!project.hasProperty('skipHello'))
+//    onlyIf {!project.hasProperty('skipHello')}
+    println 'hello world2 !'
+    doLast {
+        println("hello world2 do last !")
+    }
+}
+hello2.doFirst {
+    println("hello world2 do first!")
+}
+
 dependencies {
     implementation(project(":user-manage-sdk"))
     implementation(project(":lib-a"))
