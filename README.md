@@ -105,6 +105,13 @@ configurations.all {
 
 被 UP-TO-DATE 标记的 TASK 意味着被重用了，没有执行跳过了，节省了构建时间
 
-![image-20210702163707055](/Users/panqinzhang/Library/Application Support/typora-user-images/image-20210702163707055.png)
+### Gradle 命令
 
-![image-20210702164835221](/Users/panqinzhang/Library/Application Support/typora-user-images/image-20210702164835221.png)
+```shell
+# 根据 settings.gradle 生成 gradle-wrapper.jar gradle-wrapper.properties gradlew, gradlew.bat
+gradle wrapper --gradle-version 7.4.2 --distribution-type bin
+# task wrapper 可以根据配置生成
+./gradlew wrapper
+# 升级版本
+./gradlew wrapper --gradle-version 7.4.2
+```
