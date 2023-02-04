@@ -11,9 +11,13 @@ bash scripts/change_nexus3_password.sh
 
 
 
-## 目录文件介绍
 
-### gradle-wrapper.properties
+
+## Gradle 基础
+
+### 目录文件介绍
+
+#### gradle-wrapper.properties
 
 ```shell
 distributionBase=GRADLE_USER_HOME
@@ -78,11 +82,11 @@ dependencies{ str -> println str }
 
 
 
-## 生命周期
+### 生命周期
 
 Gradle 的构建过程都分为三部分：初始化阶段、配置阶段和执行阶段。
 
-### 初始化阶段
+#### 初始化阶段
 
 `初始化阶段` gradle 会解析 `setting.gradle` 文件，确定哪些项目需要参与构建，并且为这些项目创建一个对应的 Project 实例。
 
@@ -93,7 +97,7 @@ Gradle 的构建过程都分为三部分：初始化阶段、配置阶段和执�
 
 
 
-### 配置阶段
+#### 配置阶段
 
 `配置阶段` 会执行各项目下的 `build.gradle` 脚本，完成Project的配置，并且构造 `Task` 任务依赖关系图。
 
@@ -106,13 +110,13 @@ Gradle 的构建过程都分为三部分：初始化阶段、配置阶段和执�
 
 
 
-### 执行阶段
+#### 执行阶段
 
 在配置阶段结束后，Gradle会根据任务[Task](https://link.juejin.cn/?target=https%3A%2F%2Fdocs.gradle.org%2Fcurrent%2Fjavadoc%2Forg%2Fgradle%2Fapi%2FTask.html)的依赖关系创建一个有向无环图，可以通过`Gradle`对象的`getTaskGraph`方法访问，对应的类为[TaskExecutionGraph](https://link.juejin.cn/?target=https%3A%2F%2Fdocs.gradle.org%2Fcurrent%2Fjavadoc%2Forg%2Fgradle%2Fapi%2Fexecution%2FTaskExecutionGraph.html)，然后通过调用`gradle <任务名>`执行对应任务。
 
 
 
-## Task
+### Task
 
 
 
@@ -191,7 +195,28 @@ configurations.all {
 
 被 UP-TO-DATE 标记的 TASK 意味着被重用了，没有执行跳过了，节省了构建时间
 
-## Gradle Task
+
+
+## Plugin
+
+### java-library
+
+```groovy
+dependencies {
+    api 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'com.google.guava:guava:31.1-jre'
+}
+```
+
+`commons-lang3` 和 `guava` 都会被传递到引入 jar 包的 `工程 a`，只是二者在 `工程 a` 都会被传递过来，只是二者 scope 不一样。
+
+api 对应 compile，在 `工程 a` 可以直接使用，编译可以通过。
+
+implementation 对应 runtime，编译找不到。
+
+
+
+## Gradle command
 
 ### wrapper
 
