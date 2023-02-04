@@ -1,9 +1,12 @@
 ## nexts
 
-#### 查看密码
+#### 修改 admin 密码
 
 ```shell
-docker exec fly-gradle-nexus3 cat /nexus-data/admin.password
+# 查看 admin 生成的密码
+# docker exec fly-gradle-nexus3 cat /nexus-data/admin.password
+
+bash scripts/change_nexus3_password.sh
 ```
 
 

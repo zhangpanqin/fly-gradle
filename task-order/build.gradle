@@ -5,38 +5,37 @@ plugins {
 group 'com.mflyyou'
 version '1.23.0-SNAPSHOT'
 
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
-test {
-    useJUnitPlatform()
+tasks.register('task1') {
+    println('配置阶段执行-task1')
+}
+
+task1.doFirst {
+    println("task1-------doFirst")
+    println 'task1-------doLast'
+}
+
+task1.doLast {
+    println 'task1-------doLast'
+}
+tasks.register('task2') {
+    println('配置阶段执行-task2')
+}
+
+task2.doFirst {
+    println 'task2-------doFirst'
+}
+
+task2.doLast {
+    println 'task2-------doLast'
 }
 
 
-task task1 {
-    doFirst {
-        println("task1-------doFirst")
-    }
+task1.dependsOn check
 
-    doLast {
-        println("task1-------doLast")
-    }
-}
-
-
-task task2 {
-    doFirst {
-        println("task2-------doFirst")
-    }
-
-    doLast {
-        println("task2-------doLast")
-    }
-}
-
+task2.dependsOn check

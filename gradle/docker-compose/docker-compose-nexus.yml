@@ -1,0 +1,18 @@
+version: '3'
+services:
+  nexus:
+    image: sonatype/nexus3:3.46.0
+    restart: always
+    container_name: fly-gradle-nexus3
+    ports:
+      - "9908:8081"
+    networks:
+      - fly-gradle
+    volumes:
+      - fly-gradle-nexus-data:/nexus-data
+networks:
+  fly-gradle:
+    driver: bridge
+volumes:
+  fly-gradle-nexus-data:
+    driver: local

@@ -1,34 +1,38 @@
 plugins {
     id 'java'
+    id 'com.avast.gradle.docker-compose' apply false
 }
 allprojects {
+    group 'com.mflyyou'
     java {
-        toolchain {
-            languageVersion = JavaLanguageVersion.of(17)
-        }
+        targetCompatibility = 17
+        sourceCompatibility = 17
     }
     repositories {
+        maven {
+            url = "file://$projectDir/maven/releases"
+        }
         mavenLocal()
+        maven {
+            url 'http://localhost:9908/repository/maven-public/'
+            allowInsecureProtocol true
+            credentials {
+                username = 'admin'
+                password = 'admin123'
+            }
+        }
         mavenCentral()
     }
 }
 
 subprojects {
-    configurations {
-        parentBom
-        runtimeOnly.extendsFrom(parentBom)
-        compileOnly.extendsFrom(parentBom)
-        annotationProcessor.extendsFrom(parentBom)
-        implementation.extendsFrom(parentBom)
-    }
-
-
     tasks.withType(Test).configureEach {
         useJUnitPlatform()
     }
-
 }
 
 wrapper {
     gradleVersion = "7.6"
 }
+
+apply from: "${rootProject.projectDir}/gradle/docker-compose/docker-compose.gradle"

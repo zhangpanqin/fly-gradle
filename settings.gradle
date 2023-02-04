@@ -2,8 +2,13 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
     }
+    plugins {
+        id 'com.avast.gradle.docker-compose' version '0.16.11'
+    }
 }
 
 rootProject.name = 'fly-gradle'
 include 'task-order'
+include 'common'
+include 'application'
 
