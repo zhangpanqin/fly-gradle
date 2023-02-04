@@ -5,13 +5,14 @@ plugins {
 allprojects {
     group 'com.mflyyou'
     java {
-        targetCompatibility = 17
-        sourceCompatibility = 17
+        toolchain {
+            languageVersion=JavaLanguageVersion.of(17)
+        }
     }
     repositories {
-        maven {
-            url = "file://$projectDir/maven/releases"
-        }
+//        maven {
+//            url = "file://$projectDir/maven/releases"
+//        }
         mavenLocal()
         maven {
             url 'http://localhost:9908/repository/maven-public/'

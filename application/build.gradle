@@ -10,8 +10,7 @@ configurations {
     }
 }
 dependencies {
-    implementation(project(":common"))
-//    compile 'com.mflyyou:common:1.0.4'
+    implementation 'com.mflyyou:common:1.0.1'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'

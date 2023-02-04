@@ -1,5 +1,4 @@
 plugins {
-    id 'java'
     id 'java-library'
     id 'maven-publish'
 }
@@ -21,14 +20,14 @@ publishing {
         }
     }
     repositories {
-//        maven {
-//            url = version.endsWith('SNAPSHOT') ? "${maven_snapshots_url}" : "${maven_releases_url}"
-//            allowInsecureProtocol true
-//            credentials {
-//                username = 'admin'
-//                password = 'admin123'
-//            }
-//        }
+        maven {
+            url = version.endsWith('SNAPSHOT') ? "${maven_snapshots_url}" : "${maven_releases_url}"
+            allowInsecureProtocol true
+            credentials {
+                username = 'admin'
+                password = 'admin123'
+            }
+        }
         maven {
             def releasesRepoUrl = "${rootProject.projectDir}/maven/releases"
             def snapshotsRepoUrl = "${rootProject.projectDir}/maven/snapshots"
