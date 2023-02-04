@@ -3,12 +3,11 @@
   <groupId>com.mflyyou</groupId>
   <artifactId>common</artifactId>
   <versioning>
-    <latest>1.0.4</latest>
-    <release>1.0.4</release>
+    <latest>1.1.1</latest>
+    <release>1.1.1</release>
     <versions>
-      <version>1.0.2</version>
-      <version>1.0.4</version>
+      <version>1.1.1</version>
     </versions>
-    <lastUpdated>20230204155938</lastUpdated>
+    <lastUpdated>20230204175205</lastUpdated>
   </versioning>
 </metadata>

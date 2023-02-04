@@ -10,18 +10,18 @@ allprojects {
         }
     }
     repositories {
-//        maven {
-//            url = "file://$projectDir/maven/releases"
-//        }
-        mavenLocal()
         maven {
-            url 'http://localhost:9908/repository/maven-public/'
-            allowInsecureProtocol true
-            credentials {
-                username = 'admin'
-                password = 'admin123'
-            }
+            url = "file://$rootDir/maven/releases"
         }
+        mavenLocal()
+//        maven {
+//            url 'http://localhost:9908/repository/maven-public/'
+//            allowInsecureProtocol true
+//            credentials {
+//                username = 'admin'
+//                password = 'admin123'
+//            }
+//        }
         mavenCentral()
     }
 }

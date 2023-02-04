@@ -4,10 +4,10 @@ plugins {
 }
 
 
-version '1.0.4'
+version '1.1.1'
 
 dependencies {
-    api 'org.apache.commons:commons-math3:3.6.1'
+    api 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'com.google.guava:guava:31.1-jre'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
@@ -20,17 +20,17 @@ publishing {
         }
     }
     repositories {
+//        maven {
+//            url = version.endsWith('SNAPSHOT') ? "${maven_snapshots_url}" : "${maven_releases_url}"
+//            allowInsecureProtocol true
+//            credentials {
+//                username = 'admin'
+//                password = 'admin123'
+//            }
+//        }
         maven {
-            url = version.endsWith('SNAPSHOT') ? "${maven_snapshots_url}" : "${maven_releases_url}"
-            allowInsecureProtocol true
-            credentials {
-                username = 'admin'
-                password = 'admin123'
-            }
-        }
-        maven {
-            def releasesRepoUrl = "${rootProject.projectDir}/maven/releases"
-            def snapshotsRepoUrl = "${rootProject.projectDir}/maven/snapshots"
+            def releasesRepoUrl = "file://$rootDir/maven/releases"
+            def snapshotsRepoUrl = "file://$rootDir/maven/snapshots"
             url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
         }
     }

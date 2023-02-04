@@ -3,7 +3,7 @@
   "component": {
     "group": "com.mflyyou",
     "module": "common",
-    "version": "1.0.4",
+    "version": "1.1.1",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -26,21 +26,21 @@
       "dependencies": [
         {
           "group": "org.apache.commons",
-          "module": "commons-math3",
+          "module": "commons-lang3",
           "version": {
-            "requires": "3.6.1"
+            "requires": "3.12.0"
           }
         }
       ],
       "files": [
         {
-          "name": "common-1.0.4.jar",
-          "url": "common-1.0.4.jar",
-          "size": 940,
-          "sha512": "258b3dd3584c3e018394887c2c8796877b7a4f3f5f18ca9f7b962bfe8c45bb9ec6b7d7ca7b2a0346c6f8108e2ea09de999a3242512c9f313e97b640d4c8b4358",
-          "sha256": "a77d07fa55bf21cc9468a4d89577b5fda4808c143854f9822815680aaa2ccd34",
-          "sha1": "d07c14e029b1618096bd2b2226e6f159cbf3658f",
-          "md5": "e64e32d9b66c4d780d285776a7be3d19"
+          "name": "common-1.1.1.jar",
+          "url": "common-1.1.1.jar",
+          "size": 1175,
+          "sha512": "f3457da35af2bc3dbb3325455ddd35080a218bc1ea40dc65cf7db0f23a1684cb4798d0020030fc01476bf8f531bd152caf819f808db0106948fea070a2320765",
+          "sha256": "c5816f9798d8ce2e14867c2bd37d5bda2a9bd56ef663e6229ec418f8ebf4147a",
+          "sha1": "c7aed9c86c9a7891270a1cb304ca7740690ed316",
+          "md5": "15ef03bfd154939b4d5456515f6474de"
         }
       ]
     },
@@ -63,21 +63,21 @@
         },
         {
           "group": "org.apache.commons",
-          "module": "commons-math3",
+          "module": "commons-lang3",
           "version": {
-            "requires": "3.6.1"
+            "requires": "3.12.0"
           }
         }
       ],
       "files": [
         {
-          "name": "common-1.0.4.jar",
-          "url": "common-1.0.4.jar",
-          "size": 940,
-          "sha512": "258b3dd3584c3e018394887c2c8796877b7a4f3f5f18ca9f7b962bfe8c45bb9ec6b7d7ca7b2a0346c6f8108e2ea09de999a3242512c9f313e97b640d4c8b4358",
-          "sha256": "a77d07fa55bf21cc9468a4d89577b5fda4808c143854f9822815680aaa2ccd34",
-          "sha1": "d07c14e029b1618096bd2b2226e6f159cbf3658f",
-          "md5": "e64e32d9b66c4d780d285776a7be3d19"
+          "name": "common-1.1.1.jar",
+          "url": "common-1.1.1.jar",
+          "size": 1175,
+          "sha512": "f3457da35af2bc3dbb3325455ddd35080a218bc1ea40dc65cf7db0f23a1684cb4798d0020030fc01476bf8f531bd152caf819f808db0106948fea070a2320765",
+          "sha256": "c5816f9798d8ce2e14867c2bd37d5bda2a9bd56ef663e6229ec418f8ebf4147a",
+          "sha1": "c7aed9c86c9a7891270a1cb304ca7740690ed316",
+          "md5": "15ef03bfd154939b4d5456515f6474de"
         }
       ]
     },
@@ -91,13 +91,13 @@
       },
       "files": [
         {
-          "name": "common-1.0.4-sources.jar",
-          "url": "common-1.0.4-sources.jar",
-          "size": 787,
-          "sha512": "d63d8a0f4ae181214442950b14b26db8cbeeaaa47c2739d9bf3ae23323b1fff280ef572253327b38c3aa7ba163a85e2855b53c83f53ec09b3d4be0bab657aef5",
-          "sha256": "88617ad2af0ba48bdbf7cc4651486badcc29e2b757e8506f2e4795021dec9020",
-          "sha1": "dff5f1c2e466e699dd558d9629249066d5eb62ae",
-          "md5": "844989fafb6e3cee6c6ba2455438504d"
+          "name": "common-1.1.1-sources.jar",
+          "url": "common-1.1.1-sources.jar",
+          "size": 903,
+          "sha512": "7d2f71fa7d82467079f696ed5bcf2712696ce5c316290cea03c3d1f4a3b3a25d7d6c50881d0bc032958d3e08e652b5e1bc827c1d3e9f13f8352721943becfd6f",
+          "sha256": "91846cfb5e536f396ed02d0ea6d71d6aab4d58fe7a41a6ea71db6298bff192d9",
+          "sha1": "31b587097ad00dd6fca61dfb988bb87f6cd9508c",
+          "md5": "7e2fac30de6d5e098a4ecfccc92518f8"
         }
       ]
     }
