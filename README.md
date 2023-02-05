@@ -40,6 +40,10 @@ org.gradle.jvmargs=-Xms512m -Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutO
 
 
 
+`Daemon` 默认三小时过期。
+
+当我们经常需要重复构建，跑测试的时候，提高构建速度。
+
 
 
 ### 目录文件介绍
@@ -123,45 +127,95 @@ Gradle 的构建过程都分为三部分：初始化阶段、配置阶段和执�
 
 # 依赖管理
 
-gradle 默认的依赖管理。
+gradle 默认的依赖管理: 当出现依赖冲突的时候，gradle 优先选择版本较高的，因为较高版本会兼容低版本。
 
 ```groovy
+dependencies {
+    implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'com.google.code.findbugs:jsr305:3.0.0'
 
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
 ```
 
 
 
-
+```shell
+# 可以看到 com.google.code.findbugs:jsr305:3.0.0 被 gradle 选择到 com.google.code.findbugs:jsr305:3.0.2
+gradle dependency-management:dependencies --configuration compileClasspath
+```
 
 
 
 ### 依赖冲突
 
-- 禁用以来传递
+- 禁用依赖传递
+
+guava 不会传递依赖它依赖的库到当前库，可以看到
+
+```text
+compileClasspath - Compile classpath for source set 'main'.
++--- com.google.guava:guava:31.1-jre
+\--- com.google.code.findbugs:jsr305:3.0.0
+```
+
+
 
 ```txt
 dependencies { 
-  compile('org.springframework:spring-core:3.0.6') {
-  	transitive = false 
-  } 
+    implementation 'com.google.guava:guava:31.1-jre', {
+        transitive = false
+    }
+    implementation 'com.google.code.findbugs:jsr305:3.0.0'
 }
 ```
 
 - 排除某个依赖
 
+Guava 依赖的别的 jar 可以传递进来，而且排除了 `findbugs`, 项目依赖的版本为 `3.0.0`。
+
+```text
+compileClasspath - Compile classpath for source set 'main'.
++--- com.google.guava:guava:31.1-jre
+|    +--- com.google.guava:failureaccess:1.0.1
+|    +--- com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
+|    +--- org.checkerframework:checker-qual:3.12.0
+|    +--- com.google.errorprone:error_prone_annotations:2.11.0
+|    \--- com.google.j2objc:j2objc-annotations:1.3
+\--- com.google.code.findbugs:jsr305:3.0.0
+```
+
+
+
 ```txt
 dependencies { 
-	compile('org.springframework:spring-core:3.0.6.RELEASE') {
-		exclude name: 'commons-logging' 
-	}
+	 implementation 'com.google.guava:guava:31.1-jre', {
+        exclude group: 'com.google.code.findbugs', module: 'jsr305'
+    }
+    implementation 'com.google.code.findbugs:jsr305:3.0.0'
 }
 ```
 
 - 强制使用某个版本
 
+```text
++--- com.google.guava:guava:31.1-jre
+|    +--- com.google.guava:failureaccess:1.0.1
+|    +--- com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
+|    +--- com.google.code.findbugs:jsr305:3.0.2 -> 3.0.0
+|    +--- org.checkerframework:checker-qual:3.12.0
+|    +--- com.google.errorprone:error_prone_annotations:2.11.0
+|    \--- com.google.j2objc:j2objc-annotations:1.3
+\--- com.google.code.findbugs:jsr305:3.0.0
+```
+
+
+
 ```txt
 dependencies { 
-  compile('org.springframework:spring-core:3.0.6.RELEASE') {
+	implementation 'com.google.guava:guava:31.1-jre'
+  implementation 'com.google.code.findbugs:jsr305:3.0.0', {
   	force = true 
   } 
 }
@@ -195,14 +249,6 @@ configurations.all {
     exclude group: 'org.slf4j', module: 'slf4j-simple'
 }
 ```
-
-守护进程
-
-默认三小时过期。
-
-当我们经常需要重复构建，跑测试的时候，提高构建速度
-
-被 UP-TO-DATE 标记的 TASK 意味着被重用了，没有执行跳过了，节省了构建时间
 
 
 

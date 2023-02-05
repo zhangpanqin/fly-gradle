@@ -11,4 +11,5 @@ rootProject.name = 'fly-gradle'
 include 'task-order'
 include 'common'
 include 'application'
+include 'dependency-management'
 
