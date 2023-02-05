@@ -1,3 +1,5 @@
+import org.apache.commons.lang3.StringUtils
+
 plugins {
     id 'java'
 }
@@ -5,6 +7,11 @@ plugins {
 group 'com.mflyyou'
 version '1.23.0-SNAPSHOT'
 
+configurations.runtimeClasspath.each { File f -> println f }
+
+if (StringUtils.isNotBlank("aaa")) {
+    println "aaaaa"
+}
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
@@ -16,15 +23,14 @@ tasks.register('task1') {
 }
 
 task1.doFirst {
-    println("task1-------doFirst")
-    println 'task1-------doLast'
+    println 'task1-------doFirst'
 }
 
 task1.doLast {
     println 'task1-------doLast'
 }
 tasks.register('task2') {
-    println('配置阶段执行-task2')
+    println '配置阶段执行-task2'
 }
 
 task2.doFirst {
@@ -36,6 +42,35 @@ task2.doLast {
 }
 
 
-task1.dependsOn check
+check.dependsOn task1
 
-task2.dependsOn check
+check.dependsOn task2
+
+
+tasks.register("task3", Exec) {
+    workingDir "$rootDir"
+    commandLine "ls"
+}
+
+class MyTaskType extends DefaultTask {
+    @TaskAction
+    public void doSelf() {
+        println 'MyTaskType action'
+    }
+}
+
+tasks.register("task4", MyTaskType) {
+    doFirst {
+        println 'task4 doFirst'
+    }
+}
+
+tasks.named("task4") {
+    doLast {
+        println 'task4 doLast'
+    }
+}
+
+tasks.named("task4").get().doLast {
+    println 'task4 doLast'
+}

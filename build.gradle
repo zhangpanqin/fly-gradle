@@ -1,3 +1,16 @@
+buildscript {
+    repositories {
+        maven {
+            url = "file://$rootDir/maven/releases"
+        }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.apache.commons:commons-lang3:3.12.0'
+    }
+}
+
 plugins {
     id 'java'
     id 'com.avast.gradle.docker-compose' apply false

@@ -15,6 +15,33 @@ bash scripts/change_nexus3_password.sh
 
 ## Gradle 基础
 
+### Gradle Daemon
+
+为加快项目构建，gralde 会启动一个常驻进程去处理构建。
+
+```shell
+# 查看 daemon 运行状态
+./gradlew --status
+# stop daemon 进程
+./gradlew --stop
+# 重启 daemon 进程
+./gradlew --daemon
+```
+
+
+
+在项目 `gradle.properties` 下配置启用 gradle daemon。
+
+```properties
+org.gradle.caching=true
+org.gradle.parallel=true
+org.gradle.jvmargs=-Xms512m -Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
+```
+
+
+
+
+
 ### 目录文件介绍
 
 #### gradle-wrapper.properties
@@ -35,50 +62,28 @@ zipStorePath=wrapper/dists
 
 ### build.gradle
 
-#### 闭包 (closure)
 
-A closure definition follows this syntax:
 
-{ [closureParameters -> ] statements }
+### Build Script
 
 ```groovy
-{ item++ }                                          
-
-{ -> item++ }                                       
-
-{ println it }                                      
-
-{ it -> println it }                                
-
-{ name -> println name }                            
-
-{ String x, int y ->                                
-    println "hey ${x} the value is ${y}"
+buildscript {
+    repositories {
+        maven {
+            url = "file://$rootDir/maven/releases"
+        }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.apache.commons:commons-lang3:3.12.0'
+    }
 }
-
-{ reader ->                                         
-    def line = reader.readLine()
-    line.trim()
-}
-
-def closureWithOneArg = { str -> println str }
-// 执行闭包
-closureWithOneArg("张小凡")
-
-
-
-def dependencies(Closure<String> closure) {
-    def project = "111"
-    println "模拟 gradle 配置"
-    closure(project)
-    println "模拟 gradle 配置"
-}
-
-dependencies({ str -> println str })
-dependencies(closureWithOneArg)
-// 简化写法
-dependencies{ str -> println str }
 ```
+
+`buildscript` 是定义构建脚本(build.gradle 中代码)的依赖和 repository.
+
+
 
 
 
@@ -116,9 +121,13 @@ Gradle 的构建过程都分为三部分：初始化阶段、配置阶段和执�
 
 
 
-### Task
+# 依赖管理
 
+gradle 默认的依赖管理。
 
+```groovy
+
+```
 
 
 
@@ -216,7 +225,136 @@ implementation 对应 runtime，编译找不到。
 
 
 
-## Gradle command
+## Gradle Task
+
+
+
+### 基础 task
+
+```shell
+# 查看项目的配置属性
+./gradlew properties
+
+# 查看依赖
+
+```
+
+
+
+### Task types
+
+[Gradle DSL Version 7.6 Task Types](https://docs.gradle.org/7.6/dsl/index.html#N104E0)
+
+
+
+#### 闭包 (closure)
+
+A closure definition follows this syntax:
+
+{ [closureParameters -> ] statements }
+
+- 当方法的最后一个参数是闭包时，可以将闭包放在方法调用之后：
+
+```groovy
+{ item++ }                                          
+
+{ -> item++ }                                       
+
+{ println it }                                      
+
+{ it -> println it }                                
+
+{ name -> println name }                            
+
+{ String x, int y ->                                
+    println "hey ${x} the value is ${y}"
+}
+
+{ reader ->                                         
+    def line = reader.readLine()
+    line.trim()
+}
+
+def closureWithOneArg = { str -> println str }
+// 执行闭包
+closureWithOneArg("张小凡")
+
+
+
+def dependencies(Closure<String> closure) {
+    def project = "111"
+    println "模拟 gradle 配置"
+    closure(project)
+    println "模拟 gradle 配置"
+}
+
+dependencies({ str -> println str })
+dependencies(closureWithOneArg)
+// 简化写法
+dependencies{ str -> println str }
+
+
+
+def task(String name, Closure<String> closure) {
+    closure(name)
+}
+
+task('aaa', { str -> println(str) })
+// 最后一个参数是闭包，可以放到方法小括号外面
+task('bbb') { str -> println(str) }
+```
+
+
+
+#### 定义 Task 带 Type
+
+```groovy
+tasks.register("task3", Exec) {
+    workingDir "$rootDir"
+    commandLine "ls"
+}
+```
+
+
+
+#### 自定义 Task Type
+
+```groovy
+class MyTaskType extends DefaultTask {
+    @TaskAction
+    public void doSelf() {
+        println 'MyTaskType action'
+    }
+}
+
+tasks.register("task4", MyTaskType) {
+    doFirst {
+        println 'task4 doFirst'
+    }
+}
+```
+
+
+
+#### 获取已经定义的 Task
+
+```groovy
+tasks.named("task4") {
+    doLast {
+        println 'task4 doLast'
+    }
+}
+
+tasks.named("task4").get().doLast {
+    println 'task4 doLast'
+}
+```
+
+
+
+
+
+
 
 ### wrapper
 
