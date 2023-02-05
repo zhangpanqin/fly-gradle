@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'java-gradle-plugin'
+}
+
+group = 'com.mflyyou'
+version = '0.0.1'
+
+gradlePlugin {
+    plugins {
+        greetingsPlugin {
+            id = 'com.mflyyou.greeting'
+            implementationClass = 'com.mflyyou.plugin.GreetingPlugin'
+        }
+    }
+}
+publishing {
+    repositories {
+        maven {
+            url="file://${rootDir}/maven/plugin"
+        }
+    }
+    publications {
+        greetingPlugin(MavenPublication) {
+            from components.java
+        }
+    }
+}

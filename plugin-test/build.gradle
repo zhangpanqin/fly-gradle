@@ -1,14 +1,19 @@
 plugins {
     id 'java'
-    id 'com.mflyyou.greeting'
+    id 'com.mflyyou.greeting' version '0.0.1'
+    id 'com.mflyyou.hello'
 }
-
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
-greeting {
+hello {
     message = 'zhangpanqin'
+}
+check.dependsOn hello
+
+greeting {
+    message = 'plugin test 设置'
 }

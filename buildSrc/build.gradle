@@ -4,9 +4,9 @@ plugins {
 
 gradlePlugin {
     plugins {
-        simplePlugin {
-            id = 'com.mflyyou.greeting'
-            implementationClass = 'com.mflyyou.plugin.GreetingPlugin'
+        helloPlugin {
+            id = 'com.mflyyou.hello'
+            implementationClass = 'com.mflyyou.plugin.HelloPlugin'
         }
     }
 }

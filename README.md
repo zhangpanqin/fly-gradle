@@ -398,6 +398,23 @@ tasks.named("task4").get().doLast {
 
 
 
+#### 传递值到 task 中去
+
+```groovy
+public abstract class GreetingTask extends DefaultTask {
+    @Input
+    public abstract Property<String> getMessage();
+    @TaskAction
+    public void run() {
+    }
+}
+greeting {
+    message = 'plugin test 设置'
+}
+```
+
+`@Input` 注入值。
+
 
 
 

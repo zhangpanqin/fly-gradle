@@ -1,5 +1,8 @@
 pluginManagement {
     repositories {
+        maven {
+            url="file://${rootDir}/maven/plugin"
+        }
         gradlePluginPortal()
     }
     plugins {
@@ -13,4 +16,5 @@ include 'common'
 include 'application'
 include 'dependency-management'
 include 'plugin-test'
+include 'plugin'
 
