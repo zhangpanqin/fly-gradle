@@ -16,7 +16,6 @@ plugins {
     id 'com.avast.gradle.docker-compose' apply false
 }
 allprojects {
-    group 'com.mflyyou'
     java {
         toolchain {
             languageVersion=JavaLanguageVersion.of(17)

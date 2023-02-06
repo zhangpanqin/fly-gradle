@@ -146,7 +146,30 @@ dependencies {
 gradle dependency-management:dependencies --configuration compileClasspath
 ```
 
+```shell
+gradle -q dependency-management:dependencyInsight --dependency jsr305 --configuration compileClasspath
+```
 
+```text
+com.google.code.findbugs:jsr305:3.0.0 (forced)
+  Variant compile:
+    | Attribute Name                 | Provided | Requested    |
+    |--------------------------------|----------|--------------|
+    | org.gradle.status              | release  |              |
+    | org.gradle.category            | library  | library      |
+    | org.gradle.libraryelements     | jar      | classes      |
+    | org.gradle.usage               | java-api | java-api     |
+    | org.gradle.dependency.bundling |          | external     |
+    | org.gradle.jvm.environment     |          | standard-jvm |
+    | org.gradle.jvm.version         |          | 17           |
+
+com.google.code.findbugs:jsr305:3.0.0
+\--- compileClasspath
+
+com.google.code.findbugs:jsr305:3.0.2 -> 3.0.0
+\--- com.google.guava:guava:31.1-jre
+     \--- compileClasspath
+```
 
 ### 依赖冲突
 
