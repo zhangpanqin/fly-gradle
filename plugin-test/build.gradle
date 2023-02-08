@@ -3,6 +3,7 @@ plugins {
     id 'com.mflyyou.hello'
     id 'mflyyou.maven.publicsh'
     id 'com.mflyyou.greeting'
+    id 'mflyyou.java-conventions'
 }
 
 dependencies {

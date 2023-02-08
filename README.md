@@ -308,6 +308,51 @@ Gradle项目有一个相关的ExtensionContainer对象，它包含了应用到�
     - They cannot start with `org.gradle`.
     - They cannot have the same name as a built-in plugin id.
 
+Gradle提供了用于维护对象集合的类型，目的是很好地扩展Gradle的dsl，并提供有用的特性，如惰性配置。
+
+
+
+SpotBugs is an external plugin - external plugins [need to be added as implementation dependencies](https://docs.gradle.org/current/userguide/custom_plugins.html#applying_external_plugins_in_precompiled_script_plugins) before they can be applied in a precompiled script plugin:
+
+- precompiled script plugin mflyyou.java-conventions.gradle
+
+```groovy
+// path script-plugin/src/main/groovy/mflyyou.java-conventions.gradle
+plugins {
+    id 'java'
+    id 'checkstyle'
+    id 'com.github.spotbugs'
+}
+
+repositories {
+    mavenCentral()
+}
+```
+
+- build.gradle
+
+```groovy
+// script-plugin/build.gradle
+plugins {
+    id "groovy-gradle-plugin"
+}
+
+repositories {
+    gradlePluginPortal()
+}
+
+dependencies {
+    implementation 'com.github.spotbugs.snom:spotbugs-gradle-plugin:5.0.12'
+    testImplementation platform("org.spockframework:spock-bom:2.1-groovy-3.0")
+    testImplementation 'org.spockframework:spock-core'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+```
+
 
 
 ## Gradle Task
