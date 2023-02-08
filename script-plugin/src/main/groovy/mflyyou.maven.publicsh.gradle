@@ -1,0 +1,7 @@
+tasks.register("groovy_gradle_plugin_hello2_gradle") {
+    doFirst {
+        println 'groovy_gradle_plugin_hello2_gradle doFirst'
+    }
+}
+
+check.dependsOn('groovy_gradle_plugin_hello2_gradle')

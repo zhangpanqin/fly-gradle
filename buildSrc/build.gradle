@@ -1,12 +1,29 @@
 plugins {
     id 'java-gradle-plugin'
+    id 'java'
 }
-
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+repositories {
+    mavenCentral()
+}
 gradlePlugin {
     plugins {
         helloPlugin {
             id = 'com.mflyyou.hello'
-            implementationClass = 'com.mflyyou.plugin.HelloPlugin'
+            implementationClass = 'com.mflyyou.plugin.BinaryRepositoryVersionPlugin'
         }
     }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
 }
