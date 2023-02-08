@@ -1,12 +1,15 @@
 plugins {
-    id 'java'
     id 'maven-publish'
     id 'java-gradle-plugin'
 }
 
 group = 'com.mflyyou'
 version = '0.0.1'
-
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
 gradlePlugin {
     plugins {
         greetingsPlugin {
