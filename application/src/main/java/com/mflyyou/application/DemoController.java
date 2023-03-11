@@ -2,8 +2,6 @@ package com.mflyyou.application;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import lombok.extern.jackson.Jacksonized;
 import org.javamoney.moneta.Money;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +21,7 @@ public class DemoController {
 
     @PostMapping("/dc-3512")
     public DcPayload dc3512(@RequestBody DcPayload payload) {
+        System.out.println(DcPayload.builder().build());
         return payload;
     }
 

@@ -43,9 +43,6 @@ subprojects {
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'java'
 
-    dependencies {
-        implementation platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
-    }
 
     tasks.withType(Test).configureEach {
         useJUnitPlatform()
