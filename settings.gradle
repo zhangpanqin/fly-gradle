@@ -6,6 +6,7 @@ pluginManagement {
         gradlePluginPortal()
     }
     plugins {
+//
         id 'com.avast.gradle.docker-compose' version "${docker_compose_version}"
         id 'org.springframework.boot' version "${spring_boot_version}"
     }
@@ -18,4 +19,3 @@ include 'common'
 include 'application'
 include 'dependency-management'
 include 'plugin-test'
-

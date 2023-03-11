@@ -43,12 +43,6 @@ subprojects {
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'java'
 
-    configurations {
-        compileOnly {
-            extendsFrom annotationProcessor
-        }
-    }
-
     dependencies {
         implementation platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
     }
@@ -63,3 +57,4 @@ wrapper {
 }
 
 apply from: "${rootProject.projectDir}/gradle/docker-compose/docker-compose.gradle"
+

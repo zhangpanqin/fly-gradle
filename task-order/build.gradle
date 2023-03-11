@@ -22,6 +22,7 @@ tasks.register('task1') {
     println('配置阶段执行-task1')
 }
 
+
 task1.doFirst {
     println 'task1-------doFirst'
 }
@@ -74,3 +75,15 @@ tasks.named("task4") {
 tasks.named("task4").get().doLast {
     println 'task4 doLast'
 }
+
+tasks.register("task55"){
+    doFirst {
+        println "task55"
+    }
+}
+
+tasks.register("task66",{
+    doFirst {
+        println "task66"
+    }
+})

@@ -3,10 +3,10 @@ plugins {
 }
 
 dependencies {
-    implementation 'com.google.guava:guava:31.1-jre'
-    implementation 'com.google.code.findbugs:jsr305:3.0.0', {
-        force = true
+    implementation 'com.google.guava:guava:31.1-jre', {
+        exclude group: 'com.google.code.findbugs', module: 'jsr305'
     }
+    implementation 'com.google.code.findbugs:jsr305:3.0.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }

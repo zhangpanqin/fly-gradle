@@ -1,3 +1,8 @@
+plugins {
+    id 'java'
+    id 'checkstyle'
+    id 'com.github.spotbugs'
+}
 tasks.register("groovy_gradle_plugin_hello2_gradle") {
     doFirst {
         println 'groovy_gradle_plugin_hello2_gradle doFirst'

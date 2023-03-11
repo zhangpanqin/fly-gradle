@@ -1,10 +1,9 @@
 plugins {
     id 'java'
 }
-tasks.register("hello2_gradle") {
+
+tasks.register("task99"){
     doFirst {
-        println 'hello2_gradle doFirst'
+        println "task99"
     }
 }
-
-check.dependsOn('hello2_gradle')

@@ -5,6 +5,7 @@ plugins {
 
 dependencies {
     implementation 'com.mflyyou:common:1.1.1'
+    implementation 'org.zalando:jackson-datatype-money:1.3.0'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'

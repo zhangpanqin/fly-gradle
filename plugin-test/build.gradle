@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'com.mflyyou.hello'
+    id 'mflyyou.hello2'
     id 'mflyyou.maven.publicsh'
     id 'com.mflyyou.greeting'
     id 'mflyyou.java-conventions'
