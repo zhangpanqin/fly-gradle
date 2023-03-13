@@ -15,7 +15,15 @@ plugins {
     id 'java'
     id 'com.avast.gradle.docker-compose' apply false
     id 'org.springframework.boot' apply false
+    id 'com.mflyyou.binary.plugin.greeting'
+    id 'mflyyou_script_plugin.maven.publicsh'
+    id 'mflyyou_script_plugin.java-conventions'
 }
+
+greeting {
+    message = "fly-gradle-build.gradle-test-message"
+}
+
 allprojects {
     java {
         toolchain {

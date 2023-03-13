@@ -13,7 +13,7 @@ java {
 gradlePlugin {
     plugins {
         greetingsPlugin {
-            id = 'com.mflyyou.greeting'
+            id = 'com.mflyyou.binary.plugin.greeting'
             implementationClass = 'com.mflyyou.plugin.GreetingPlugin'
         }
     }

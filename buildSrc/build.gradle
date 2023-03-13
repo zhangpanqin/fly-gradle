@@ -13,7 +13,7 @@ repositories {
 gradlePlugin {
     plugins {
         helloPlugin {
-            id = 'com.mflyyou.hello'
+            id = 'com.mflyyou.java.build_src.hello'
             implementationClass = 'com.mflyyou.plugin.BinaryRepositoryVersionPlugin'
         }
     }

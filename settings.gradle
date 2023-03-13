@@ -6,15 +6,14 @@ pluginManagement {
         gradlePluginPortal()
     }
     plugins {
-//
         id 'com.avast.gradle.docker-compose' version "${docker_compose_version}"
         id 'org.springframework.boot' version "${spring_boot_version}"
     }
 }
 includeBuild 'script-plugin'
-includeBuild 'plugin'
+includeBuild 'binary-plugin'
 rootProject.name = 'fly-gradle'
-include 'task-order'
+include 'task'
 include 'common'
 include 'application'
 include 'dependency-management'

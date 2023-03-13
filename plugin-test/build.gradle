@@ -1,10 +1,10 @@
 plugins {
     id 'java'
-    id 'com.mflyyou.hello'
-    id 'mflyyou.hello2'
-    id 'mflyyou.maven.publicsh'
-    id 'com.mflyyou.greeting'
-    id 'mflyyou.java-conventions'
+    id 'com.mflyyou.java.build_src.hello'
+    id 'mflyyou.build-src-groovy-plugin'
+    id 'com.mflyyou.binary.plugin.greeting'
+    id 'mflyyou_script_plugin.maven.publicsh'
+    id 'mflyyou_script_plugin.java-conventions'
 }
 
 dependencies {

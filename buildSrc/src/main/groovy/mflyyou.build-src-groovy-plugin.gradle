@@ -1,0 +1,9 @@
+plugins {
+    id 'java'
+}
+
+tasks.register("build_src_task_99"){
+    doFirst {
+        println "build_src_task_99"
+    }
+}
